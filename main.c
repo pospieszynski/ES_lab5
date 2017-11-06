@@ -31,8 +31,8 @@ int main() {
       
       
       while(1) {
-	pushToFifo(&fifo);
-	readFromFifo(&fifo);
+      	pushToFifo(&fifo);
+      	readFromFifo(&fifo);
       }
 #endif 
   }
@@ -46,8 +46,8 @@ int pushToFifo(struct FIFO* fifo) {
     readCharacter(&character);
     if( character != '\r') {
       if(pushToFIFO(fifo, character) == FAILURE) {
-	printString("\n\rError!\r\n");
-	return FAILURE;
+      	printString("\n\rError!\r\n");
+      	return FAILURE;
       }
     } else {
       break; 

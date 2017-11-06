@@ -29,10 +29,9 @@ int main() {
 #if TASK == 4
       struct FIFO fifo;
       
-      initFIFO
+      initFIFO(&fifo);
       
       while(1) {
-	emptyFIFO(&fifo);
       	pushToFifo(&fifo);
       	readFromFifo(&fifo);
       }

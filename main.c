@@ -32,7 +32,6 @@ int main() {
       initFIFO(&fifo);
       
       while(1) {
-	emptyFIFO(&fifo);
       	pushToFifo(&fifo);
       	readFromFifo(&fifo);
       }
@@ -48,7 +47,7 @@ int pushToFifo(struct FIFO* fifo) {
     readCharacter(&character);
     if( character != '\r') {
       if(pushToFIFO(fifo, character) == FAILURE) {
-      	printString("\n\rError!\r\n");
+      	printString("\n\rBuffer overflow error.\r\n");
       	return FAILURE;
       }
     } else {

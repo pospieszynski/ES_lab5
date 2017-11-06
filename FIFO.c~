@@ -10,7 +10,7 @@ void emptyFIFO (struct FIFO* fifo) {
 }
 
 int pushToFIFO (struct FIFO* Fifo, char data) {
-  if ( (( Fifo->tail - Fifo->head) == 1 ) || ( (Fifo->tail == 0 && Fifo->head == BUFFER_SIZE - 1 ) ) )
+  if ( (( Fifo->tail - Fifo->head) == 1 ) || ( (Fifo->tail == 0 && Fifo->head == BUFFER_SIZE) ) )
     return FAILURE;
   /* CRITICAL POINT */
   Fifo->head = (Fifo->head + 1) % (BUFFER_SIZE+1);

@@ -3,7 +3,7 @@
 #define FAILURE -1
 
 typedef struct FIFO {
- char buffer[BUFFER_SIZE];	 
+ char buffer[BUFFER_SIZE+1];	 
  unsigned int head; 
  unsigned int tail;
 };	

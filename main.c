@@ -2,16 +2,16 @@ void dbgu_print_ascii(const char *buffer) {}
 
 #include "FIFO.h"
 #include "DBGU.h"
-#define INIT_SUCCESS 0
+#define DBGU_INIT_SUCCESS 0
 #define SUCCESS 1
 #define FAILURE -1
-#define TASK 4
+#define TASK FIFO
 
-int pushToFifo(struct FIFO* fifo);
+int populateFifo(struct FIFO* fifo);
 void readFromFifo(struct FIFO* fifo);
 
 int main() {
-  if( initializeDGBU() == INIT_SUCCESS ) {
+  if( initializeDGBU() == DBGU_INIT_SUCCESS ) {
     
 #if TASK == 1
       printAlphabet();
@@ -26,21 +26,21 @@ int main() {
 	reverseLetterCase();
 #endif
 	
-#if TASK == 4
+#if TASK == FIFO
       struct FIFO fifo;
       
-      initFIFO(&fifo);
-      
-      while(1) {
-      	pushToFifo(&fifo);
-      	readFromFifo(&fifo);
+      if( initFIFO(&fifo) == SUCCESS ) {
+	while(1) {
+	  populateFifo(&fifo);
+	  readFromFifo(&fifo);
+	}
       }
 #endif 
   }
   while(1);
 }
 
-int pushToFifo(struct FIFO* fifo) {
+int populateFifo(struct FIFO* fifo) {
   char character;
   
   while(1) {
@@ -51,7 +51,7 @@ int pushToFifo(struct FIFO* fifo) {
       	return FAILURE;
       }
     } else {
-      break; 
+      return SUCCESS; 
     }
   }
 }

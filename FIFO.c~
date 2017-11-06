@@ -1,8 +1,9 @@
 #include "FIFO.h"
 
-void initFIFO (struct FIFO* fifo) {
+int initFIFO (struct FIFO* fifo) {
   fifo->head=0;
   fifo->tail=0;
+  return SUCCESS;
 }
 
 void emptyFIFO (struct FIFO* fifo) {
@@ -21,7 +22,7 @@ int pushToFIFO (struct FIFO* Fifo, char data) {
 int popFromFIFO (struct FIFO* Fifo, char* data) {
   if ((Fifo->head != Fifo->tail)) {
     /* CRITICAL POINT */
-    Fifo->tail = (Fifo->tail + 1) % (BUFFER_SIZE);
+    Fifo->tail = (Fifo->tail + 1) % (BUFFER_SIZE + 1);
     *data = Fifo->buffer[Fifo->tail];
     return SUCCESS;
   } else {

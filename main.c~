@@ -29,11 +29,12 @@ int main() {
 #if TASK == 4
       struct FIFO fifo;
       
+      initFIFO
       
       while(1) {
-	initFIFO(&fifo);
-	pushToFifo(&fifo);
-	readFromFifo(&fifo);
+	emptyFIFO(&fifo);
+      	pushToFifo(&fifo);
+      	readFromFifo(&fifo);
       }
 #endif 
   }
@@ -47,14 +48,13 @@ int pushToFifo(struct FIFO* fifo) {
     readCharacter(&character);
     if( character != '\r') {
       if(pushToFIFO(fifo, character) == FAILURE) {
-	printString("\n\rError!\r\n");
-	return FAILURE;
+      	printString("\n\rError!\r\n");
+      	return FAILURE;
       }
     } else {
       break; 
     }
   }
-  pushToFIFO(fifo, '\0');
 }
 
 void readFromFifo(struct FIFO* fifo) {
@@ -66,7 +66,7 @@ void readFromFifo(struct FIFO* fifo) {
     } else if(letter >= 'A' && letter <= 'Z') {
       letter += CHARACTERS_OFFSET; 
     }
-  sendCharacter(letter);  
+    sendCharacter(letter);
   }
   
   sendCharacter('\n');

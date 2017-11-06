@@ -1,9 +1,9 @@
-#define BUFFER_SIZE 15
+#define BUFFER_SIZE 3
 #define SUCCESS 1
 #define FAILURE -1
 
 typedef struct FIFO {
- char buffer[BUFFER_SIZE + 1];	 
+ char buffer[BUFFER_SIZE];	 
  unsigned int head; 
  unsigned int tail;
 };	

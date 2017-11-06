@@ -29,8 +29,10 @@ int main() {
 #if TASK == 4
       struct FIFO fifo;
       
+      initFIFO(&fifo);
       
       while(1) {
+	emptyFIFO(&fifo);
       	pushToFifo(&fifo);
       	readFromFifo(&fifo);
       }
@@ -53,7 +55,6 @@ int pushToFifo(struct FIFO* fifo) {
       break; 
     }
   }
-  pushToFIFO(fifo, '\0');
 }
 
 void readFromFifo(struct FIFO* fifo) {
@@ -65,7 +66,7 @@ void readFromFifo(struct FIFO* fifo) {
     } else if(letter >= 'A' && letter <= 'Z') {
       letter += CHARACTERS_OFFSET; 
     }
-    sendCharacter(letter);  
+    sendCharacter(letter);
   }
   
   sendCharacter('\n');

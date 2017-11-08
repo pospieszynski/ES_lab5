@@ -6,10 +6,6 @@ int initFIFO (struct FIFO* fifo) {
   return SUCCESS;
 }
 
-void emptyFIFO (struct FIFO* fifo) {
-  fifo->head = fifo->tail;
-}
-
 int pushToFIFO (struct FIFO* Fifo, char data) {
   if ( (( Fifo->tail - Fifo->head) == 1 ) || ( (Fifo->tail == 0 && Fifo->head == BUFFER_SIZE) ) )
     return FAILURE;

@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 void dbgu_print_ascii(const char *buffer) {}
 
 #include "FIFO.h"
@@ -11,6 +15,8 @@ int populateFifo(struct FIFO* fifo);
 void readFromFifo(struct FIFO* fifo);
 
 int main() {
+  configureRegisters(); // LED !!
+  
   if( initializeDGBU() == DBGU_INIT_SUCCESS ) {
     
 #if TASK == 1
@@ -57,17 +63,30 @@ int populateFifo(struct FIFO* fifo) {
 }
 
 void readFromFifo(struct FIFO* fifo) {
-  char letter;
-  
-  while(popFromFIFO(fifo, &letter) == SUCCESS) {
-    if(letter >= 'a' && letter <= 'z') {
-      letter -= CHARACTERS_OFFSET;
-    } else if(letter >= 'A' && letter <= 'Z') {
-      letter += CHARACTERS_OFFSET; 
+    int size = getFIFOSize(fifo);
+    char* command = (char*) malloc((size+1)*sizeof(char));
+    int index = 0;
+    char letter;
+    
+    while(popFromFIFO(fifo, &letter) == SUCCESS) {
+      command[index] = letter;
+      index++;
     }
-    sendCharacter(letter);
-  }
-  
-  sendCharacter('\n');
-  sendCharacter('\r');
+    
+    command[index] = '\0';
+    printString(command);
+    
+    if(strcmp(command, "de1") == 0) {
+      printString("\n\r Turning on diod 1.\r\n");
+      turnOnDS1();
+    } else if(strcmp(command, "de2") == 0) {
+      printString("\n\r Turning on diod 2.\r\n");
+      turnOnDS2();
+    } else if(strcmp(command, "dd2") == 0) {
+      printString("\n\r Turning off diod 2.\r\n");
+      turnOffDS2();
+    } else if(strcmp(command, "dd1") == 0) {
+      printString("\n\r Turning off diod 1.\r\n");
+      turnOffDS1();
+    }
 }

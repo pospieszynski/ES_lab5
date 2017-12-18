@@ -11,3 +11,5 @@ typedef struct FIFO {
 int initFIFO (struct FIFO *Fifo);
 int pushToFIFO (struct FIFO *Fifo, char data);
 int popFromFIFO (struct FIFO *Fifo, char *data);
+int emptyFIFO(struct FIFO* Fifo);
+int getFIFOSize(struct FIFO* fifo);

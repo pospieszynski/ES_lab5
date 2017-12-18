@@ -25,3 +25,12 @@ int popFromFIFO (struct FIFO* Fifo, char* data) {
   *data = Fifo->buffer[Fifo->tail];
   return SUCCESS;
 }
+
+int emptyFIFO(struct FIFO* fifo) {
+  fifo->head = fifo->tail;
+  return SUCCESS;
+}
+
+int getFIFOSize(struct FIFO* fifo) {
+  return (fifo->head - fifo->tail);
+}

@@ -75,6 +75,30 @@ void configurreButtons() {
   //after that on register bit associatd with BP1 we have 0 since we overwritten it but this does not mean that it is disabled. to do that we would have to use PU disable registers
 }
 
+void enablePullUpBP1() {
+  *AT91C_PIOC_PPUER = SET_BP1;
+}
+
+void enablePullUpBP2() {
+  *AT91C_PIOC_PPUER = SET_BP2;
+}
+
+void disablePullUpBP1() {
+  *AT91C_PIOC_PPUDR = SET_BP1;
+}
+
+void disablePullUpBP2() {
+  *AT91C_PIOC_PPUDR = SET_BP2;
+}
+
+int pullUpStatusBP1() {
+  return *AT91C_PIOC_PPUSR & SET_BP1;
+}
+
+int pullUpStatusBP2() {
+  return *AT91C_PIOC_PPUSR & SET_BP2;
+}
+
 void configureRegisters() {
   configureClock();
   configureLEDs();
@@ -82,7 +106,7 @@ void configureRegisters() {
 }
 
 void handleButtonPressed() {
-  if(checkIfRightButtonPressed())
+  if(checkIfRightButtonPressed()) // BP2
     turnOnDS2();
   else if(checkIfLeftButtonPressed()) {
     turnOffDS2();

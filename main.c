@@ -89,9 +89,17 @@ void readFromFifo(struct FIFO* fifo) {
     } else if(strcmp(command, "d 1 d") == 0) {
       turnOffDS1();
     } else if(strcmp(command, "d 1 s") == 0) {
-
+      if(DS1Status()) { //
+        printString("\n\r DS1 - 1 state\r\n");
+      } else {
+        printString("\n\r DS1 - 0 state\r\n");
+      }
     } else if(strcmp(command, "d 2 s") == 0) {
-
+      if(DS2Status()) { //
+        printString("\n\r DS2 - 1 state\r\n");
+      } else {
+        printString("\n\r DS2 - 0 state\r\n");
+      }
     } else if(strcmp(command, "b 1 p e") == 0) {
       enablePullUpBP1();
     } else if(strcmp(command, "b 2 p e") == 0) {
@@ -101,9 +109,17 @@ void readFromFifo(struct FIFO* fifo) {
     } else if(strcmp(command, "b 2 p d") == 0) {
       disablePullUpBP2();
     } else if(strcmp(command, "b 1 p s") == 0) {
-      pullUpStatusBP1();
+      if(pullUpStatusBP1()) {
+        printString("\n\r BP1 pullup - 1 state\r\n");
+      } else {
+        printString("\n\r BP1 pullup - 0 state\r\n");
+      }
     } else if(strcmp(command, "b 2 p s") == 0) {
-      pullUpStatusBP1();
+      if(pullUpStatusBP2()) {
+        printString("\n\r BP2 pullup - 1 state\r\n");
+      } else {
+        printString("\n\r BP2 pullup - 0 state\r\n");
+      }
     } else if(strcmp(command, "b 1 s") == 0) {
       if(checkIfLeftButtonPressed()) {
         printString("\n\rBP 1 - 0 state\r\n");
@@ -121,6 +137,8 @@ void readFromFifo(struct FIFO* fifo) {
       printString("\n\rd 2 e - diod 2 enable\r\n");
       printString("\n\rd 1 d - diod 1 disable\r\n");
       printString("\n\rd 2 d - diod 2 disable\r\n");
+      printString("\n\rd 1 s - diod 1 status\r\n");
+      printString("\n\rd 2 s - diod 2 status\r\n");
       printString("\n\rb 1 p e - button 1 pullup enable\r\n");
       printString("\n\rb 2 p e - button 2 pullup enable\r\n");
       printString("\n\rb 1 p d - button 1 pullup disable\r\n");

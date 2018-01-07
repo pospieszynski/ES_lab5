@@ -36,6 +36,22 @@ void turnOffDS2() {
   *AT91C_PIOC_SODR = SET_DS_2;
 }
 
+int DS1Status() {
+  return (*AT91C_PIOB_PDSR & SET_DS_1);
+}
+
+int DS2Status() {
+  return (*AT91C_PIOC_PDSR & SET_DS_2);
+}
+
+int BP1Status() {
+  return (*AT91C_PIOB_PDSR & SET_BP1);
+}
+
+int BP2Status() {
+  return (*AT91C_PIOC_PDSR & SET_BP2);
+}
+
 void turnOnDS1() {
   *AT91C_PIOB_CODR = SET_DS_1;
 }
